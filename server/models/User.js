@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
-    city: String,
+    city: String, 
     state: String,
     country: String,
     occupation: String,

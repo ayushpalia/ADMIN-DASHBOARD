@@ -99,12 +99,18 @@ function Sidebar({
   setIsSidebarOpen,
   isNonMobile,
 }) {
+  // pathname is a react-router-dom hook that gives the current path
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
-
+// so setActive me vo string ayegi jo path dena chahte apn 
+//means dependecy array me pathname hai to jab bhi pathname change hoga
+// to useEffect chalega aur setActive me vo string set ho jayegi
+// to basically apn ne active me vo string set krdi hai jo path hai
   useEffect(() => {
+    //dekho ye pathname.substring(1) se apn ne vo / hata diya hai
+    //to agar pathname /dashboard hai to active me dashboard set hoga
     setActive(pathname.substring(1));
   }, [pathname]);
 
@@ -137,8 +143,11 @@ function Sidebar({
                   width="fit-content"
                 >
                   <Typography variant="h4" fontWeight="bold">
-                    MyDashboard
+                    ADMIN DASHBOARD
                   </Typography>
+                  {
+                  //means mobile hai bhai to chevron left button dikhana hai
+}
                   {!isNonMobile && (
                     <IconButton
                       onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -149,8 +158,14 @@ function Sidebar({
                 </Box>
               </FlexBetween>
             </Box>
+            {
+            //array of objects hai navItems me
+            //to map krenge aur har object se text aur icon le lenge  
+}
             <List>
-              {navItems.map(({ text, icon }) => {
+              { navItems.map(({ text, icon }) => {
+                //if empty icon then we just return a Typography component
+                //with the text and some styling
                 if (!icon) {
                   return (
                     <Typography
@@ -163,6 +178,9 @@ function Sidebar({
                   );
                 }
                 const lcText = text.toLowerCase();
+
+                //if icon is present then we return a ListItem with ListItemButton
+                //and ListItemIcon and ListItemText components
 
                 return (
                   <ListItem key={text} disablePadding>

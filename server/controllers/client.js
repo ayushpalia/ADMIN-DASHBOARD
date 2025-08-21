@@ -8,15 +8,28 @@ import User from "../models/User.js";
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
-
+    // 
     const productsWithStats = await Promise.all(
+      //product.map is an array of products  
+      //we are using Promise.all to wait for all the promises to resolve
+      //and which is basically return array of promises and it will  wait everyone to finish
+      //and then we will return the array of products with stats
+      //we are using map to iterate over the products and for each product we are finding the
       products.map(async (product) => {
         const stat = await ProductStat.find({
           productId: product._id,
         });
         return {
+          //spreads the raw product data (_doc is Mongoose’s way of storing the actual MongoDB fields).
+          // and adds the stat data to it
+          //so we are returning an object that contains all the product data and the stat data
           ...product._doc,
+          //adds new property 'stat' to the product object
+          //which contains the stats for that product
           stat,
+          // so we are returning the all the original product’s fields from MongoDB
+          //like _id, name, price, etc.
+          //and the stats for that product
         };
       })
     );

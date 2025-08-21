@@ -42,6 +42,9 @@ export const tokensDark = {
 };
 
 // function that reverses the color palette
+// basicallt jo upr ke color hai uske vo indices ke hisaab se reverse krdega
+// to ye basically dar->light kregu and light->dark kregi click ke hisaab se
+// so that we can use the same tokens for both light and dark mode
 function reverseTokens(tokensDark) {
   const reversedTokens = {};
   Object.entries(tokensDark).forEach(([key, val]) => {
@@ -59,6 +62,9 @@ function reverseTokens(tokensDark) {
 export const tokensLight = reverseTokens(tokensDark);
 
 // mui theme settings
+//phir isme input ayega dak ya not dark ka dark hoga to ye first option chlega 
+//nhi to last vala aur usse phle apn ne color ko jo user
+//set krna chaht hai krdia to chl jayega
 export const themeSettings = (mode) => {
   return {
     palette: {
@@ -67,6 +73,7 @@ export const themeSettings = (mode) => {
         ? {
             // palette values for dark mode
             primary: {
+              //ye jo bhi vaha se select hoga usko pura copy krdega isme 
               ...tokensDark.primary,
               main: tokensDark.primary[400],
               light: tokensDark.primary[500],

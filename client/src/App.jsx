@@ -26,6 +26,10 @@ import Performance from "./scenes/Performance";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    //Always renders Sidebar + Navbar.
+    //outlet layout ke andr hai to ye sare routes phle
+    //apne parent ko layouut manege aur jaha outlet likha hai vaha chle jayega
+    //Has <Outlet /> as a placeholder where the current page will appear.
     <Route element={<Layout />}>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/dashboard" element={<Dashboard />} />
@@ -41,12 +45,20 @@ const router = createBrowserRouter(
       <Route path="/performance" element={<Performance />} />
     </Route>
   )
+  //This means every route inside will automatically render inside Layout’s <Outlet />.
 );
 
 function App() {
+  //apn ne slice me theme default dark rakha hai
   const mode = useSelector((state) => state.global.mode);
+  //apn ab themeSettings me mode pass krenge kyuki apn ne bnaya hi esa tha ki ab
+  //theme jayegi to vo usme change krega aur (state bhi update krega)=ye kam vss slicer krega
+  //baki actauully change theme.js me hoga
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-
+// dekho yha pe apn ne theme yaha di hai phir kabhi insaaan button click krega
+  //to mode change hoga (upr hai)aur themeSettings me mode pass hoga
+  //to themeSettings me mode change hoga aur waha se themeSettings se theme change
+  //aur yha pe phirse render hoga aur theme change ho jayegi reload
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

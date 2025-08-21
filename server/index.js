@@ -10,6 +10,8 @@ import generalRoutes from "./routes/generalRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import managementRoutes from "./routes/managementRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
+import User from "./models/User.js";
+import { dataUser } from "./data/index.js";
 import Product from "./models/Product.js";
 import {
   dataAffiliateStat,
@@ -41,18 +43,21 @@ app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
-const PORT = process.env.PORT || 9000;
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port: ${PORT}`);
-    });
-    // Product.insertMany(dataProduct)
+  const PORT = process.env.PORT || 9000;
+  mongoose
+    .connect(process.env.MONGO_URL)
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server running on port: ${PORT}`);
+      });
+        /* ONLY ADD DATA ONE TIME */
+    // AffiliateStat.insertMany(dataAffiliateStat);
+    // OverallStat.insertMany(dataOverallStat);
+    // Product.insertMany(dataProduct);
     // ProductStat.insertMany(dataProductStat);
     // Transaction.insertMany(dataTransaction);
-    // OverallStat.insertMany(dataOverallStat);
-    // AffiliateStat.insertMany(dataAffiliateStat);
+    // User.insertMany(dataUser);
+     console.log("Connected to MongoDB");
   })
   .catch((error) => {
     console.log(error.message);

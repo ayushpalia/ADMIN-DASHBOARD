@@ -27,6 +27,9 @@ function Product({
   supply,
   stat,
 }) {
+  //like tumne frontend pe see more button diya hai
+  //to isse apn useState se ek isExpanded variable banayenge
+  //jo initially false hoga
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -89,9 +92,14 @@ function Product({
 }
 
 function Products() {
+  //reduxtool query hook to fetch products
+  //aur agr isse data ata hai to yehi vairable use krte hai
+  //means ek proopetty hai RTK ki ki data aya to us variable me save krao
+  //aur agr fetch hor ahi means ek isLoading variable hota hai
+  //to usse check krte hai ki data fetch horahi hai ya nahi
   const { data, isLoading } = useGetProductsQuery();
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
-
+//nhi aya means loading ke liye ek box dikhadia
   if (!data || isLoading)
     return (
       <Box
@@ -106,6 +114,7 @@ function Products() {
       </Box>
     );
 
+    //agya data mil gaya to products ka array hai
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="PRODUCTS" subtitle="See your list of products." />
@@ -121,6 +130,19 @@ function Products() {
           "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
         }}
       >
+        {/* data is an array of products */}
+        {/* map over the data and return a Product component for each product */}
+        {/* to apn jo data ay hai basically vo array ofobjects hoga
+        { pura product ka data hoga
+        _id, name, description, price, rating, category, supply
+        ,state(isko apn ne backend me append kia hai)
+        } 
+        // ab isme apn trvaerse krege aur hr ek object print krwana hai means frontend pe lana
+        //hai to apn Product component banaenge (jo ek card ki trh hoga)
+        //usme sb detail iterative way me pass krenge
+        //to apn Product component me pass krenge to hr ek object ki particular detaik
+        //alagse jayegi 
+         */ }
         {data.map(
           ({
             _id,
