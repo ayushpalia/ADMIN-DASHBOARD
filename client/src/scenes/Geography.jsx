@@ -4,10 +4,20 @@ import { geoData } from "@/state/geoData";
 import { Box, useTheme, CircularProgress } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
 
+
+// sbse phle apn ne ek code copy kia hai geodata.js isko kahi bhi rkho apn ne api 
+//folder me isleye rkha hai kyuki ye ek GeoJSON hai jo jrurri hai
+//iske bina apn map nhi bana saktee
+//ye geojson basically countries ke coordinates deta hai (PURA DATA)
 function Geography() {
   const theme = useTheme();
   const { data, isLoading } = useGetGeographyQuery();
-
+// ab is cheez me bht saare parameters hote hai jo apnko dene hote hai
+// ye apn ko nivogeomaps site se milege 
+// vaha se setup krna pdta hai data ki kis type ka map chahiye
+// kitna bada konse features chahiye vaha se copy kro aur phir hlka sa yaha modify kro 
+// like ye theme section apnne add kia hai
+//ye apnko tab chahiye jab apn dark mode vgerh krte
   if (!data || isLoading)
     return (
       <Box

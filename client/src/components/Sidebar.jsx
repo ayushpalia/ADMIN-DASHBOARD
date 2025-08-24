@@ -166,6 +166,7 @@ function Sidebar({
               { navItems.map(({ text, icon }) => {
                 //if empty icon then we just return a Typography component
                 //with the text and some styling
+                // ye to neeche dikhadiye sare option
                 if (!icon) {
                   return (
                     <Typography
@@ -181,11 +182,34 @@ function Sidebar({
 
                 //if icon is present then we return a ListItem with ListItemButton
                 //and ListItemIcon and ListItemText components
+                //onclick of ListItemButton will navigate to the path
+                //dekho like jo bhi navItem apn ne frontend me render kre hai
+                //usme se jb bhi kisi pe click hoga to apn navigate krdenge us path pe
+                //oh it is in the loop 
+                //and when we rendered all options onclick will be used in the iterated options
+                //and usme se jb bhi kisi pe click hoga to apn navigate krdenge
 
+                {
+                  /*
+                  For every item in navItems, React runs this function.
+
+Each time, it creates a new lcText based on that item’s text.
+Example: "Transactions" → "transactions", "Customers" → "customers".
+
+Each iteration gets its own closure
+
+Even though the onClick code looks the same, it’s not one shared function.
+
+It’s actually a new function bound to that iteration’s lcText.
+So the button for "Transactions" literally has an onClick like:
+                  */
+                }
                 return (
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
+                        // yaha se jo bhi text hai vo apnko path me chahiye
+                      
                         navigate(`/${lcText}`);
                         setActive(lcText);
                       }}
